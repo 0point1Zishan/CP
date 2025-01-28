@@ -8,26 +8,15 @@ void solve(){
     vector<int> v(n);
     for(int i = 0; i < n; i++)  cin >> v[i];
 
-    int ans = accumulate(v.begin(), v.end(), 0);
-    while(1){
-        if(v.size() == 1){
-            cout << max(v[0], ans) << "\n";
-            return;
+    int ans = accumulate(v.begin(), v.end(), 0LL);
+    while(v.size() > 1){
+        for(int i = 0; i < v.size()-1; i++){
+            v[i] = v[i+1] - v[i];
         }
-        vector<int> d;
-        for(int i = 0; i < v.size()-1; i++) d.push_back(v[i+1] - v[i]);
-
-        if(accumulate(d.begin(), d.end(), 0) < 0){
-            for(int i = 0; i < d.size(); i++) d[i] *= -1;
-        }
-
-        reverse(d.begin(), d.end());
-        v = d;        
-
-        int sum = accumulate(v.begin(), v.end(), 0);
-        ans = max(ans, sum);
+        v.pop_back();
+        ans = max(ans, abs(accumulate(v.begin(), v.end(), 0LL)));
     }
-    cout << ans << "\n";
+    cout << max(ans, v[0]) << "\n";
 }
 
 signed main(){
