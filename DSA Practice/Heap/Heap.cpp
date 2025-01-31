@@ -23,6 +23,25 @@ class heap{
         for(int i = 1; i < v.size(); i++) cout << v[i] << " ";
         cout << "\n";
     }
+    void deleteMX(){
+        if(v.size() <= 1) return;
+        swap(v[1], v.back());
+        v.pop_back();
+        heapfy(1);
+
+    }
+    void heapfy(int i){
+        int idx = i;
+        int l = 2 * i, r = 2 * i + 1;
+
+        if(l < v.size() && v[l] > v[idx]) idx = l;
+        if(r < v.size() && v[r] > v[idx]) idx = r;
+
+        if(i != idx){
+            swap(v[i], v[idx]);
+            heapfy(idx);
+        }
+    }
 };
 
 void solve(){
@@ -32,8 +51,10 @@ void solve(){
         int x;  cin >> x;
         a.insert(x);
     }
-
     a.print();
+    a.deleteMX();
+    a.print();
+
 }
 
 signed main(){
