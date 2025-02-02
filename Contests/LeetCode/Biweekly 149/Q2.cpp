@@ -5,25 +5,19 @@ using namespace std;
 
 int maxFreeTime(int eventTime, int k, vector<int>& startTime, vector<int>& endTime) {
     int n = startTime.size();
+
     vector<int> diff;
-    diff.push_back(0);
-    diff.push_back(startTime[0] - 0);
-    for(int i = 1; i < n; i++){
-        diff.push_back(startTime[i] - endTime[i-1]);
-    }
+    diff.push_back(startTime[0]);
+    for(int i = 1; i < n; i++)      diff.push_back(startTime[i] - endTime[i-1]);
     diff.push_back(eventTime - endTime.back());
 
-    vector<int> pf;
-    pf.push_back(diff[0]);
-    for(int i = 1; i < diff.size(); i++){
-        pf.push_back(diff[i] + pf.back());
+    int currTime = 0;
+    for(int i = 0; i <= k; i++) currTime += diff[i];
+    int ans = currTime;
+    for(int i = k + 1; i < n+1; i++){ 
+        currTime += (diff[i] - diff[i-k-1]);
+        ans = max(ans, currTime);
     }
-
-    int ans = 0;
-    for(int i = 1; i < pf.size()-k; i++){
-        ans = max(ans, pf[i+k] - pf[i-1]);
-    }
-    
     return ans;
 }
 

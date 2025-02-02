@@ -9,10 +9,7 @@ string findValidPair(string s) {
     
     for(int i = 1; i < s.size(); i++){
         if(v[s[i] - '0'] == s[i] - '0' && v[s[i-1] - '0'] == s[i-1] - '0' && s[i] != s[i-1]){
-            string ans = "";
-            ans += s[i-1];
-            ans += s[i];
-            return ans;
+            return s.substr(i-1, 2);
         }
     }
     return "";
