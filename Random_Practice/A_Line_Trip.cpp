@@ -4,15 +4,16 @@
 using namespace std;
 
 void solve(){
-    int n, d;  cin >> n >> d;
+    int n, x;   cin >> n >> x;
     vector<int> v(n);
-    for(int i = 0; i < n; i++)  cin >> v[i];
+    for(auto &i: v) cin >> i;
 
-    int mn = max(v[0], 2 * (d - v[n-1]));
+    int mx = v[0];
     for(int i = 1; i < n; i++){
-        mn = max(mn, v[i] - v[i-1]);
+        mx = max(mx, v[i] - v[i-1]);
     }
-    cout << mn << "\n";
+    mx = max(mx, 2 * (x - v.back()));
+    cout << mx << "\n";
 }
 
 signed main(){
