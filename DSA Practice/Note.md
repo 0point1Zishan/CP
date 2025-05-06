@@ -43,4 +43,4 @@
 
 
 ## Rotate Image by 90 degree
-#### code: [Link Text](Practice/189.%20Rotate%20Array.cpp)
+#### [Code](Practice/189.%20Rotate%20Array.cpp)
